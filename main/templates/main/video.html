@@ -1,0 +1,26 @@
+{% extends "main/Layouts/layout.html" %}
+{% block title %}
+
+{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block content %}
+<div class="container" style="float: left; width: 78%;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{id}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <br><br>
+    <span>{{titleTarget}}</span> <span class="text-muted">{{publishDateTarget}}</span>
+    <hr>
+    <p>{{descriptionTarget}}</p>
+</div>
+<div class="container" style="float: right; width: 22%; ">
+    <h2>Recommended Videos</h2>
+    {% for vid in videos %}
+    <div class="vidblock row">
+        <a href="{% url 'watch' id=vid.0 %}"> <img src='{{vid.2}}' > </a>
+        <span>{{vid.1}}</span>
+    </div>
+    {%endfor%}
+</div>
+{% endblock %}
+

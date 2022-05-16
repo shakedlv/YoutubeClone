@@ -1,0 +1,22 @@
+{% extends "main/Layouts/layout.html" %}
+{% block title %}
+
+{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block content %}
+<div style="padding: 32px;">
+    <div class="row">
+        {% for vid in videos %}
+        <div class="vidblock col">
+            <a href="{% url 'watch' id=vid.0 %}"> <img src='{{vid.2}}' > </a>
+            <br>
+            <span>{{vid.1}}</span>
+        </div>
+        {%endfor%}
+    </div>
+
+
+</div>
+{% endblock %}
