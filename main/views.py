@@ -31,6 +31,28 @@ def home(request):
           videoTitle.append(title)
           videoThumb.append(thumb)
 
+
+     # Search
+     if request.method == 'POST':
+          searchValue =request.POST['search']
+          urlDataSearch = "https://www.googleapis.com/youtube/v3/search?key={}&maxResults={}&part=snippet&type=video&q={}".format(API_KEY,count,searchValue)
+          webURLSearch = urllib.request.urlopen(urlDataSearch)
+          dataSearch = webURLSearch.read()
+          encodingSearch = webURLSearch.info().get_content_charset('utf-8')
+          resultsSearch = json.loads(dataSearch.decode(encodingSearch))
+
+          videoID = []
+          videoTitle =[]
+          videoThumb =[]
+          for data in resultsSearch['items']:
+               id = (data['id']['videoId'])
+               title = ((data['snippet']['title']))
+               thumb = ((data['snippet']['thumbnails']['medium']['url']))
+               videoID.append(id)
+               videoTitle.append(title)
+               videoThumb.append(thumb)
+
+
      context["videos"] = zip(videoID,videoTitle,videoThumb)
 
      return render(request, "main/home.html" , context=context)
@@ -62,6 +84,26 @@ def watch(request, id):
           videoID.append(id)
           videoTitle.append(title)
           videoThumb.append(thumb)
+
+     # Search
+     if request.method == 'POST':
+          searchValue =request.POST['search']
+          urlDataSearch = "https://www.googleapis.com/youtube/v3/search?key={}&maxResults={}&part=snippet&type=video&q={}".format(API_KEY,count,searchValue)
+          webURLSearch = urllib.request.urlopen(urlDataSearch)
+          dataSearch = webURLSearch.read()
+          encodingSearch = webURLSearch.info().get_content_charset('utf-8')
+          resultsSearch = json.loads(dataSearch.decode(encodingSearch))
+
+          videoID = []
+          videoTitle =[]
+          videoThumb =[]
+          for data in resultsSearch['items']:
+               id = (data['id']['videoId'])
+               title = ((data['snippet']['title']))
+               thumb = ((data['snippet']['thumbnails']['medium']['url']))
+               videoID.append(id)
+               videoTitle.append(title)
+               videoThumb.append(thumb)
 
      context["videos"] = zip(videoID,videoTitle,videoThumb)
 
