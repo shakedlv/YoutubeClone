@@ -10,6 +10,11 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/{{id}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <br><br>
     <span>{{titleTarget}}</span> <span class="text-muted">{{publishDateTarget}}</span>
+    <br><br>
+    <a href="{% url 'channle' id=channelId %}" style="text-decoration:none;">
+        <img src='{{channelInfo_thumb}}' style="width:48px; height:48px; border-radius:50%"><span > &nbsp; &nbsp; {{channelInfo_name}}</span>
+
+    </a>
     <hr>
     <p>{{descriptionTarget}}</p>
 </div>
