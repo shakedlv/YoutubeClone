@@ -8,8 +8,9 @@ import json
 import urllib.request
 import string
 import random
+import config
 
-API_KEY = 'AIzaSyClbdHxbV3ojvOfIArWk2DFx8HWeib_Dm8'
+API_KEY = config.YOUTUBE_API_KEY
 
 def home(request):
      
