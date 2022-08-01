@@ -11,7 +11,6 @@ import random
 import config
 
 API_KEY = config.YOUTUBE_API_KEY
-
 def home(request):
      
      count = 50
@@ -47,6 +46,7 @@ def channle(request, id):
      context={}
      context["id"] = id
      context["info"] = getChannleInfo(id)
+     context["videos"] = getChannleVideos(id , 6)
      return render(request, "main/channle.html" , context=context)
 
 def stringGenerator(size):
@@ -137,3 +137,31 @@ def  getVideoData(id):
           descriptionTarget = ((data['snippet']['description']))
      
      return [idTarget,titleTarget,channelId,publishDateTarget,descriptionTarget]
+
+def getChannleVideos(id,amount):
+     urlData = "https://www.googleapis.com/youtube/v3/search?key={}&maxResults={}&part=snippet&type=video&channelId={}".format(API_KEY,amount,id)
+     webURL = urllib.request.urlopen(urlData)
+     data = webURL.read()
+     encoding = webURL.info().get_content_charset('utf-8')
+     results = json.loads(data.decode(encoding))
+
+     videoID = []
+     videoTitle =[]
+     videoThumb =[]
+     videoThumb =[]
+     for data in results['items']:
+          id = (data['id']['videoId'])
+          try:
+               title = ((data['snippet']['title']))
+          except:
+               title = "Could not get video title!"
+          try:
+               thumb = ((data['snippet']['thumbnails']['medium']['url']))
+          except:
+               thumb = "https://i.ytimg.com/vi/{}/mqdefault.jpg".format(id)
+          videoID.append(id)
+          videoTitle.append(title)
+          videoThumb.append(thumb)
+
+     return zip(videoID,videoTitle,videoThumb)
+

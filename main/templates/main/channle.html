@@ -8,6 +8,23 @@
 {% block content %}
     <div class="container">
         <img src="{{info.2}}" alt="" style="width:64px; height:64px; border-radius:50%;"> <h2 style="display: inline;">{{info.0}}</h2>
+        <p class="text-muted">{{info.4}}</p>
     </div>
+    <hr>
+    <div class="container">
+        <p class="">{{info.3}}</p>
+    </div>
+    <div class="container ">
+        <div class="row">
+            {% for vid in videos %}
+            <div class="vidblock">
+                <a href="{% url 'watch' id=vid.0 %}"> <img src='{{vid.2}}' > </a>
+                <span>{{vid.1}}</span>
+            </div>
+            {%endfor%}
+        </div>
+
+    </div>
+
 {% endblock %}
 
